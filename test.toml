@@ -1,0 +1,19 @@
+[default_tests]
+tests = [ "test1", "test2" ]
+
+[ acpi ]
+files = [ "/home/joshwilliams/dsdt/dsdt.aml" ]
+init = "initialize"
+
+[[sequences]]
+name = "initialize"
+actions = [
+{pci_op = "read_pci_u32", segment = 0, bus = 0, device = 0, function = 0, value = 0},
+{mem_op = "read_u8", address=0x6fe7b0c0, value = 0 },
+{mem_op = "read_u8", address=0x6fe7b0c0, value = 0 }
+]
+
+[[test]]
+name = "test1"
+sequence = [ "shutdown" ]
+
